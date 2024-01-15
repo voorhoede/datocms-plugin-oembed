@@ -1,4 +1,4 @@
-import { fetchOEmbedData, getOEmbedProvider } from '../../src/utils/oembed';
+import { fetchOEmbedData, getOEmbedProvider } from '../../lib/oembed';
 
 const isValidUrl = (url: string) => {
   try {
