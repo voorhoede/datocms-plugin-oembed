@@ -38,13 +38,13 @@
     "oembed-providers": "^1.0.20230906",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-scripts": "5.0.1"
+    "react-scripts": "^3.0.1"
   },
   "devDependencies": {
     "@cloudflare/workers-types": "^4.20231218.0",
     "@types/lodash": "^4.14.202",
-    "@types/node": "^18.19.6",
-    "@types/react": "^18.2.47",
+    "@types/node": "^20.11.2",
+    "@types/react": "^18.2.48",
     "@types/react-dom": "^18.2.18",
     "cross-env": "^7.0.3",
     "typescript": "^5.3.3"
