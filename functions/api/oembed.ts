@@ -1,7 +1,5 @@
 import { fetchOEmbedData, getOEmbedProvider } from '../../src/utils/oembed';
 
-export const prerender = false;
-
 const isValidUrl = (url: string) => {
   try {
     new URL(url);
