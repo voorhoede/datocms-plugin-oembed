@@ -23,17 +23,17 @@ export const onRequest: PagesFunction = async ({ request }) => {
 	const params = Object.fromEntries(new URL(request.url).searchParams.entries()) as { url: string, [key: string]: string };
 	const { url } = params;
 	if (!url) {
-	  	return jsonResponse({ error: 'Missing \'url\' parameter' }, 400);
+	  	return jsonResponse({ error: { code: 'MISSING_PARAMETER_URL', message: 'Missing \'url\' parameter' }}, 400);
 	}
 	if (!isValidUrl(url)) {
-	  	return jsonResponse({ error: 'Invalid \'url\' parameter' }, 400);
+	  	return jsonResponse({ error: { code: 'INVALID_PARAMETER_URL', message: 'Invalid \'url\' parameter' }}, 400);
 	}
 	if (!getOEmbedProvider(url)) {
-	  	return jsonResponse({ error: 'No OEmbed provider available for given \'url\'' }, 404);
+	  	return jsonResponse({ error: { code: 'UNSUPPORTED_PROVIDER', message: 'No OEmbed provider available for given \'url\'' }}, 404);
 	}
 	const data = await fetchOEmbedData(url);
 	if (!data) {
-	  	return jsonResponse({ error: 'Error fetching OEmbed data' }, 500);
+	  	return jsonResponse({ error: { code: 'PROVIDER_ERROR', message: 'Error fetching OEmbed data' }}, 500);
 	}
 	return jsonResponse({ data });
 }

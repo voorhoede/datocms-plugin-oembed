@@ -5,7 +5,7 @@ type OEmbedEndpoint = {
     schemes: string[];
     discovery: boolean;
 }
-type OEmbedProvider = {
+export type OEmbedProvider = {
     provider_name: string;
     provider_url: string;
     endpoints: OEmbedEndpoint[];
