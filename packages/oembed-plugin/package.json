@@ -1,11 +1,24 @@
 {
   "name": "datocms-plugin-oembed",
   "version": "0.1.0",
+  "description": "DatoCMS plugin to get embed data for external content, using the OEmbed protocol.",
+  "keywords": [
+    "datocms-plugin",
+    "embed",
+    "oembed",
+    "og",
+    "opengraph",
+    "open-graph",
+    "metadata"
+  ],
+  "homepage": "https://github.com/voorhoede/datocms-plugin-oembed#readme",
+  "author": "De Voorhoede (https://voorhoede.nl/)",
   "datoCmsPlugin": {
     "title": "OEmbed (embed anything)",
-    "previewImage": "",
-    "coverImage": "",
-    "entryPoint": "build/index.html"
+    "previewImage": "docs/datocms-plugin-oembed-twitter.mov",
+    "coverImage": "docs/datocms-plugin-oembed-cover.jpg",
+    "entryPoint": "build/index.html",
+    "permissions": []
   },
   "scripts": {
     "dev": "npm start",
