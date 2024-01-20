@@ -11,7 +11,7 @@
     "open-graph",
     "metadata"
   ],
-  "homepage": "https://github.com/voorhoede/datocms-plugin-oembed#readme",
+  "homepage": "https://github.com/voorhoede/datocms-plugin-oembed/tree/main/packages/oembed-plugin#readme",
   "author": "De Voorhoede (https://voorhoede.nl/)",
   "datoCmsPlugin": {
     "title": "OEmbed (embed anything)",

@@ -1,5 +1,42 @@
 import OEmbedProviders from 'oembed-providers';
 
+// OEmbed types based on https://oembed.com/ section 2.3.4. Response parameters
+export type OEmbedType = 'photo' | 'video' | 'link' | 'rich' | 'error';
+export interface OEmbedResource {
+    type: OEmbedType;
+    version: string;
+    title: string;
+    author_name?: string;
+    author_url?: string;
+    provider_name?: string;
+    provider_url?: string;
+    cache_age?: number;
+    thumbnail_url?: string;
+    thumbnail_width?: number;
+    thumbnail_height?: number;
+}
+export interface OEmbedPhoto extends OEmbedResource {
+    type: 'photo';
+    url: string;
+    width: number;
+    height: number;
+}
+export interface OEmbedVideo extends OEmbedResource {
+    type: 'video';
+    html: string;
+    width: number;
+    height: number;
+}
+export interface OEmbedLink extends OEmbedResource {
+    type: 'link';
+}
+export interface OEmbedRich extends OEmbedResource {
+    type: 'rich';
+    html: string;
+    width: number;
+    height: number;
+}
+
 type OEmbedEndpoint = {
     url: string;
     schemes: string[];

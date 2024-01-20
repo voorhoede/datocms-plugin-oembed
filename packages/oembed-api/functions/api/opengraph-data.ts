@@ -8,21 +8,37 @@ const isValidUrl = (url: string) => {
 };
 
 const extractOpenGraphData = (html: string) => {
-    const data = {} as { [key: string]: string };
     const ogPrefix = 'og:';
-    const matches = html.match(/<meta[^>]*>/g);
-    if (!matches) {
-        return data;
-    }
-    matches.forEach(match => {
-        const property = (match.match(/property="([^"]*)"/) || [])[1];
-        const content = (match.match(/content="([^"]*)"/) || [])[1];
+    const twitterPrefix = 'twitter:';
+
+    const matches = html.match(/<meta[^>]*>/g) || [];
+    const metaTags = matches.map(match => ({
+        name: (match.match(/name="([^"]*)"/) || [])[1],
+        property: (match.match(/property="([^"]*)"/) || [])[1],
+        content: (match.match(/content="([^"]*)"/) || [])[1],
+    }));
+
+    const data = {
+        title: (html.match(/<title[^>]*>([^<]*)<\/title>/) || [])[1],
+        description: metaTags.find(tag => tag.name === 'description')?.content,
+    } as { [key: string]: string };
+
+    metaTags.forEach(({ name, content }) => {
+        if (name?.startsWith(twitterPrefix) && content) {
+            const pattern = new RegExp(`^${twitterPrefix}`);
+            const key = name.replace(pattern, '');
+            data[key] = content;
+        }
+    });
+
+    metaTags.forEach(({ property, content }) => {
         if (property?.startsWith(ogPrefix) && content) {
             const pattern = new RegExp(`^${ogPrefix}`);
             const key = property.replace(pattern, '');
             data[key] = content;
         }
     });
+
     return data;
 }
 
