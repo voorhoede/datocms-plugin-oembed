@@ -1,6 +1,6 @@
 {
   "name": "datocms-plugin-oembed",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "DatoCMS plugin to get embed data for external content, using the OEmbed protocol.",
   "keywords": [
     "datocms-plugin",
@@ -20,6 +20,12 @@
     "entryPoint": "build/index.html",
     "permissions": []
   },
+  "files": [
+    "build",
+    "docs",
+    "package.json",
+    "README.md"
+  ],
   "scripts": {
     "dev": "npm start",
     "start": "cross-env BROWSER='none' PUBLIC_URL='/' react-scripts start",

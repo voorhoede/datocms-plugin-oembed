@@ -19,8 +19,6 @@ const apiUrl = process.env.NODE_ENV === 'development'
 export default function FieldExtension({ ctx }: Props) {
     const urlFieldPath = ctx.fieldPath.replace(new RegExp(`${ctx.field.attributes.api_key}$`), ctx.parameters.urlFieldKey as string);
     const urlFieldValue = (_get(ctx.formValues, urlFieldPath) as string || '').trim();
-    // const dataFieldValue = _get(ctx.formValues, ctx.fieldPath) as OEmbedData || "{}";
-    // console.log({ urlFieldValue, dataFieldValue });
     const [data, setData] = useState<OEmbedData | null>(null);
     const [provider, setProvider] = useState<OEmbedProvider | null>(null);
 
@@ -33,8 +31,14 @@ export default function FieldExtension({ ctx }: Props) {
                 .then(res => res.json())
                 .then(res => {
                     if (res.data) {
-                        setData(res.data)
-                        ctx.setFieldValue(ctx.fieldPath, JSON.stringify(res.data, null, 2));
+                        // ensure every data object has a provider name and url
+                        const data = {
+                            provider_name: provider?.provider_name,
+                            url: urlFieldValue,
+                            ...res.data,
+                        }
+                        setData(data)
+                        ctx.setFieldValue(ctx.fieldPath, JSON.stringify(data, null, 2));
                     }
                 });
         }
@@ -45,7 +49,7 @@ export default function FieldExtension({ ctx }: Props) {
             {
                 provider && (<>
                     <details open>
-                        <summary>{ provider.provider_name } preview</summary>
+                        <summary>{ provider.provider_name } embed preview</summary>
                         { data && (
                             <div
                                 dangerouslySetInnerHTML={{ __html: data.html }}
@@ -57,7 +61,7 @@ export default function FieldExtension({ ctx }: Props) {
                         )}
                     </details>
                     <details>
-                        <summary>{ provider.provider_name } OEmbed data</summary>
+                        <summary>{ provider.provider_name } embed data</summary>
                         { data && (
                             <pre><code>{ JSON.stringify(data, null, 2) }</code></pre>
                         )}
